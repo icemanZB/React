@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>componentWillReceiveProps</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Child extends React.Component {
+		componentWillReceiveProps() {
+			console.log('参数更新了');
+		}
+
+		render() {
+			return <span>{this.props.name}</span>;
+		}
+	}
+
+	class Parent extends React.Component {
+		constructor(...args) {
+			super(...args);
+
+			this.state = {i: 0};
+		}
+
+		fn() {
+			this.setState({
+				i: this.state.i + 1
+			});
+		}
+
+		render() {
+			return <div>
+				<input type="button" value="按钮" onClick={this.fn.bind(this)}/>
+				<Child name={this.state.i}/>
+			</div>;
+		}
+	}
+
+	var oDiv = document.getElementById('box');
+
+	ReactDOM.render(
+			<Parent/>,
+			oDiv
+	);
+
+
+</script>
+</body>
+</html>

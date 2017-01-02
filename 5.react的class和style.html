@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示隐藏</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+	<style>
+		.box { width: 100px; height: 100px; background-color: #cccccc; }
+	</style>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Toggle extends React.Component {
+		constructor(...args) {
+			super(...args);
+			this.state = {display: 'block'};
+		}
+
+		fn() {
+			this.setState({
+				display: this.state.display == 'none' ? 'block' : 'none'
+			})
+		}
+
+		render() {
+			// 这里要使用 className 代替 class
+			// style 中的样式需要用 "{{}}"
+			return <div>
+				<input type="button" value="显示隐藏" onClick={this.fn.bind(this)}/>
+				<div className="box" style={{display:this.state.display}}></div>
+			</div>;
+		}
+	}
+
+	ReactDOM.render(
+			<Toggle/>,
+			document.getElementById('box')
+	)
+
+</script>
+</body>
+</html>

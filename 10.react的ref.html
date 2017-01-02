@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ref</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Title extends React.Component {
+		constructor(...args) {
+			super(...args);
+		}
+
+		fn() {
+
+			// 获得到原生的 DOM，这种方式的操作不建议使用
+			var oS = this.refs['span'];
+
+			oS.style.color = 'red';
+
+		}
+
+		render() {
+			return <div>
+				<input type="button" value="按钮" onClick={this.fn.bind(this)}/>
+				<span ref="span">Iceman</span>
+			</div>;
+		}
+	}
+	ReactDOM.render(
+			<Title/>,
+			document.getElementById('box')
+	);
+
+
+</script>
+</body>
+</html>

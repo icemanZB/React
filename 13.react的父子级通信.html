@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子级通信</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Child extends React.Component {
+		constructor(...args) {
+			super(...args);
+
+			// 子级中定义一个变量 num
+			this.num = 55;
+		}
+
+		render() {
+			// 通过回调函数的方式爸子集的内容传给父级
+			this.props.cb(this.num);
+			// 通过 this.props 接收父级传过来的内容
+			return <div>{this.props.age}</div>;
+		}
+	}
+
+	class Parent extends React.Component {
+		constructor(...args) {
+			super(...args);
+
+			this.age = 12;
+		}
+
+		// 父级接收
+		fn(num) {
+			alert(num);
+		}
+
+		render() {
+			return <div>
+				<div>aaaaa</div>
+				<Child age={this.age} cb={this.fn.bind(this)}/>
+				<div>bbbbb</div>
+			</div>;
+		}
+	}
+
+	ReactDOM.render(
+			<Parent />,
+			document.getElementById('box')
+	);
+
+
+</script>
+</body>
+</html>

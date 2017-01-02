@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件冒泡</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+
+	class Demo extends React.Component {
+		constructor(...args) {
+			super(...args);
+		}
+
+		fn1() {
+			alert('父级');
+		}
+
+		fn2(ev) {
+			alert('子级');
+			// 取消冒泡，和 jQuery 是一样的
+			// http://stackoverflow.com/questions/24415631/reactjs-syntheticevent-stoppropagation-only-works-with-react-events
+			ev.stopPropagation();
+		}
+
+		render() {
+			return <div onClick={this.fn1.bind(this)}>
+				<div onClick={this.fn2.bind(this)}>aaaaa</div>
+			</div>
+		}
+	}
+
+	ReactDOM.render(
+			<Demo/>,
+			document.getElementById('box')
+	);
+
+</script>
+</body>
+</html>

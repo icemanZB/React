@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建列表</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Item extends React.Component {
+		constructor(...args) {
+			super(...args);
+		}
+
+		render() {
+			return <li>{this.props.value}</li>;
+		}
+	}
+
+	class List extends React.Component {
+		constructor(...args) {
+			super(...args);
+
+			this.state = {arr: [12, 5, 8, 9]};
+		}
+
+		fn() {
+			this.setState({
+				// concat() 返回被连接后的新数组
+				arr: this.state.arr.concat([Math.random()])
+				// 不能直接用 push，因为是返回数组的长度，再次获取 this.state.arr 的时候就是数组的长度了
+				// arr:this.state.arr.push(Math.random())
+			});
+		}
+
+		render() {
+			// 这里的 key 必须要加，因为 React 的 DOM 需要根据这个 key 唯一标识来判断是否要更新，用于识别不同的"标签"
+			// React 不会每次都重新创建元素，先检查下是否存在，存在的话就直接更新，不用重新创建
+			var result = this.state.arr.map((val, i) => {
+				return <Item key={i} value={val}/>;
+			});
+
+			return <ul>
+				<input type="button" value="按钮" onClick={this.fn.bind(this)}/>
+				{result}
+			</ul>;
+		}
+	}
+
+	var oDiv = document.getElementById('box');
+
+	ReactDOM.render(
+			<List />,
+			oDiv
+	);
+
+</script>
+</body>
+</html>

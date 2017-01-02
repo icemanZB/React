@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生命周期</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class LifeCycle extends React.Component {
+
+		componentWillUnmount() {
+			console.log('即将销毁');
+		}
+
+		componentWillMount() {
+			console.log('即将创建完成');
+		}
+
+		componentDidMount() {
+			console.log('刚刚创建完');
+		}
+
+		render() {
+			return <div>11111</div>;
+		}
+	}
+
+
+	var oDiv = document.getElementById('box');
+	var i = 0;
+
+	document.onclick = ()=> {
+		i++;
+		if (i % 2) {
+			ReactDOM.render(
+					<LifeCycle/>,
+					oDiv
+			);
+		} else {
+			ReactDOM.render(
+					<div>qqqqq</div>,
+					oDiv
+			);
+		}
+	};
+
+
+</script>
+</body>
+</html>

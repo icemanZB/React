@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Hello extends React.Component {
+		// 用了 constructor 必须先调用 super()
+		constructor(...args) {
+			super(...args); // 父类
+			// 初始化可以直接赋值
+			this.state = {value: ''};
+		}
+
+		fn(ev) {
+			// 这里必须使用 setState()
+			// this 指向的是 class Hello，this.setState() 应该是继承与父级的方法
+			this.setState({
+				// ev 不是原生的，已经被封装
+				value: ev.target.value
+			});
+		}
+
+		render() {
+			// onChange 一定是区分大小写
+			// this.fn.bind(this); 第一个 this 是指的是 class Hello，第二个 this 是指的是 input 对象
+			return <div>
+				<input type="text" onChange={this.fn.bind(this)} />
+				<span>{this.state.value}</span>
+			</div>
+		}
+	}
+
+	ReactDOM.render(
+			<Hello/>,
+			document.getElementById('box')
+	);
+
+</script>
+</body>
+</html>

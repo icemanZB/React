@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+
+	class UserLoginForm extends React.Component {
+		// 表单的问题：value/checked 一旦赋值就不可修改，因为是 this.props 限制，导致渲染出来的 input 是只读的
+		// 1.用 value，改成 defaultValue
+		// 2.用 checked，改成 defaultChecked
+		handleChange(ev) {
+			// 或者以这种方式修改 value 值，不过不是很好
+			// this.setState({value: ev.target.value});
+		}
+
+		render() {
+			return <form action="" method="get">
+				用户名：
+				<input type="text" name="username" defaultValue={this.props.defVal}
+				       onChange={this.handleChange.bind(this)}/>
+				<br/>
+				是否接收邮件：
+				<input type="checkbox" defaultChecked="true"/>
+				<br/>
+			</form>;
+		}
+	}
+
+
+	ReactDOM.render(
+			<UserLoginForm defVal="Iceman"/>,
+			document.getElementById('box')
+	);
+
+</script>
+</body>
+</html>

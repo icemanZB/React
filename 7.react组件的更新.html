@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件的更新</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+	class Clock extends React.Component {
+		constructor(...args) {
+			super(...args);
+
+			this.state = {h: 0, m: 0, s: 0};
+
+			setInterval(()=>this.tick(), 1000);
+		}
+
+		// 组件创建完成调用
+		componentDidMount() {
+			this.tick();
+		}
+
+		tick() {
+			var oDate = new Date();
+
+			this.setState({
+				h: oDate.getHours(),
+				m: oDate.getMinutes(),
+				s: oDate.getSeconds()
+			});
+		}
+
+		componentWillUpdate() {
+			console.log('即将更新');
+		}
+
+		componentDidUpdate() {
+			console.log('刚更新完');
+		}
+
+		render() {
+			return <div>
+				<span>{this.state.h}</span>:
+				<span>{this.state.m}</span>:
+				<span>{this.state.s}</span>
+			</div>;
+		}
+	}
+
+	ReactDOM.render(
+			<Clock/>,
+			document.getElementById('box')
+	);
+
+
+</script>
+</body>
+</html>
