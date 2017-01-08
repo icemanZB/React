@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件嵌套</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+
+	var listArr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+	var ItemComponent = React.createClass({
+		render(){
+			return (
+					<li>{this.props.item}</li>
+			);
+		}
+	});
+
+	var ListComponent = React.createClass({
+		render: function () {
+			return (
+					<ul>
+						{
+							this.props.listArr.map(function (item, index) {
+								return <ItemComponent key={index} item={item}/>
+							})
+						}
+					</ul>
+			);
+		}
+	});
+
+	var oDiv = document.getElementById('box');
+
+	ReactDOM.render(
+			<ListComponent listArr={listArr}/>,
+			oDiv
+	);
+
+</script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 <script type="text/babel">
 
 	var FirstComponent = React.createClass({
-		render: function () {
+		render() {
 			console.log(this.props);
 			return (
 					<div>
@@ -20,7 +20,7 @@
 						<input type="text"/>
 						<input type="button" value={this.props.sendName}/>
 					</div>
-			)
+			);
 		}
 	});
 

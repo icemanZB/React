@@ -11,13 +11,13 @@
 <div id="box"></div>
 <script type="text/babel">
 	var FirstComponent = React.createClass({
-		getInitialState: function () {
+		getInitialState() {
 			return {
 				// this.props 是不可改变的
 				msg: this.props.value
-			}
+			};
 		},
-		render         : function () {
+		render() {
 			// this.state 是可以改变的
 			return (
 					<div>
@@ -26,9 +26,9 @@
 						<input type="button" value={this.props.sendName}/>
 						<p>{this.state.msg}</p>
 					</div>
-			)
+			);
 		},
-		changeHandle   : function (ev) {
+		changeHandle(ev) {
 			// 当 msg 值改变的时候，会重新 render 渲染
 			this.setState(
 					{msg: ev.target.value}
