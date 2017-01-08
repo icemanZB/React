@@ -32,6 +32,7 @@
 				// concat() 返回被连接后的新数组
 				arr: this.state.arr.concat([Math.random()])
 				// 不能直接用 push，因为是返回数组的长度，再次获取 this.state.arr 的时候就是数组的长度了
+				// 可以在 fn 中 先 this.state.arr.push()，然后在 setState() 中使用 this.state.arr
 				// arr:this.state.arr.push(Math.random())
 			});
 		}

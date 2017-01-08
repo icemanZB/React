@@ -10,3 +10,5 @@ http://reactjs.cn/react/index.html 官网
 http://react-china.org/  中文社区
 
 https://ant.design/  UI 组件
+
+shitf + 右键 => 打开此处的 cmd

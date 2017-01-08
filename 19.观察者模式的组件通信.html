@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件通信</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/pubsub.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+
+	// 观察者模式方便处理：子孙组件与付父组件之间的通信
+
+	var delectItem = 'delectItem';
+
+	// 孙子组件
+	var ItemComponent = React.createClass({
+		render      : function () {
+			return (
+					<li>
+						<span >{this.props.userName}</span>
+						<a href="javascript:;" onClick={this.delectHandle}>删除</a>
+					</li>
+			)
+		},
+		delectHandle: function () {
+			// 子孙组件发布事件，并且传递数据，所谓发布就是 fire()，调用订阅的回掉函数
+			PubSub.publish(delectItem, this.props._id);
+		}
+	});
+
+	// 子集组件
+	var ListComponent = React.createClass({
+		render: function () {
+			return (
+					<ul>
+						{
+							this.props.listArr.map(function (item, index) {
+								return <ItemComponent key={index} {...item} />
+							})
+						}
+					</ul>
+			)
+		}
+	});
+
+	// 父级组件
+	var MainComponent = React.createClass({
+		getInitialState  : function () {
+			return {
+				listArr: this.props.listArr
+			}
+		},
+		componentDidMount: function () {
+			// 在父组件订阅一个事件，所谓订阅就是定义函回掉数(即注册) add()
+			PubSub.subscribe(delectItem, function (evName, data) {
+				var newArr = this.state.listArr.filter(function (item, index) {
+					return item._id !== data
+				});
+
+				this.setState({listArr: newArr});
+
+			}.bind(this))
+		},
+		render           : function () {
+			return (
+					<div>
+						<ListComponent listArr={this.state.listArr}/>
+					</div>
+			)
+		}
+	});
+
+	var listArr = [
+		{
+			userName: "Iceman",
+			_id     : Date.now() + 1
+		}, {
+			userName: "Nicky",
+			_id     : Date.now()
+		}
+	];
+
+	ReactDOM.render(<MainComponent listArr={listArr}/>, document.getElementById('box'))
+
+
+</script>
+</body>
+</html>
