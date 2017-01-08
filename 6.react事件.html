@@ -15,6 +15,7 @@
 		constructor(...args) {
 			super(...args); // 父类
 			// 初始化可以直接赋值
+			// 组件状态发生改变，调用 render 重新渲染
 			this.state = {value: ''};
 		}
 
@@ -30,6 +31,8 @@
 		render() {
 			// onChange 一定是区分大小写
 			// this.fn.bind(this); 第一个 this 是指的是 class Hello，第二个 this 是指的是 input 对象
+			// input 这种单标签必须加上 '<input /> 中的 /'，否则会报错
+			// 组件中只能有一个顶层标签
 			return <div>
 				<input type="text" onChange={this.fn.bind(this)} />
 				<span>{this.state.value}</span>

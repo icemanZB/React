@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件的属性</title>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+
+	var FirstComponent = React.createClass({
+		render: function () {
+			console.log(this.props);
+			return (
+					<div>
+						<h1>{this.props.title}</h1>
+						<input type="text"/>
+						<input type="button" value={this.props.sendName}/>
+					</div>
+			)
+		}
+	});
+
+	var obj = {
+		title   : 'Hello World',
+		sendName: '提交'
+	};
+
+	ReactDOM.render(
+			// ...obj 是 es6 传参的一种方式
+			// <FirstComponent title= {obj.title} sendName={obj.sendName} />,
+			<FirstComponent {...obj} />,
+			document.getElementById('box'),
+			function () {
+				console.log('页面渲染完成');
+			}
+	);
+</script>
+</body>
+</html>

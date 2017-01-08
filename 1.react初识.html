@@ -12,7 +12,11 @@
 <script type="text/babel">
 	ReactDOM.render(
 			<h1>hello world</h1>,
-			document.getElementById('box')
+			document.getElementById('box'),
+			// 回调函数
+			function () {
+				console.log('页面渲染完成');
+			}
 	);
 </script>
 </body>

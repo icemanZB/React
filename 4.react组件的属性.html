@@ -10,6 +10,9 @@
 <body>
 <div id="box"></div>
 <script type="text/babel">
+
+	let age = 28;
+
 	class Hello extends React.Component {
 		render() {
 			// this.props 中的属性是不可以修改的
@@ -17,8 +20,9 @@
 		}
 	}
 
+	// {} 渲染变量里面的值，并且 {} 中可以写 js 代码。 如 {alert(1)}
 	ReactDOM.render(
-			<Hello name="Iceman" age="28"/>,
+			<Hello name="Iceman" age={age}/>,
 			document.getElementById('box')
 	);
 

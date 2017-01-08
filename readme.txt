@@ -2,6 +2,11 @@
 
 webstrom bug http://stackoverflow.com/questions/32708008/superclass-contructor-invocation-should-be-in-constructor-body，升级最新版本
 
-由于 babel 是实时编译的，所以页面会定一下，体验很差，之后解决
+由于 babel 是实时编译的，所以页面会定一下，体验很差，之后解决,就是使用 webpack
 
 
+http://reactjs.cn/react/index.html 官网
+
+http://react-china.org/  中文社区
+
+https://ant.design/  UI 组件
